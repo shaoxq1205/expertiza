@@ -126,22 +126,7 @@
                 '<option value="2">Late</option>' +
                 '<option value="3">Yes</option>' +
                 '</select></td>';
-
-//        html += '<td align="center" class="due_date_resubmission_allowed_id" width="10%">' +
-//                '<select id="due_date_resubmission_allowed_id" name="due_date[resubmission_allowed_id]">' +
-//                '<option value="">---</option>' +
-//                '<option value="1">No</option>' +
-//                '<option value="2">Late</option>' +
-//                '<option value="3">Yes</option>' +
-//                '</select></td>';
-
-//        html += '<td align="center" class="due_date_rereview_allowed_id" width="10%">' +
-//                '<select id="due_date_rereview_allowed_id" name="due_date[rereview_allowed_id]">' +
-//                '<option value="">---</option>' +
-//                '<option value="1">No</option>' +
-//                '<option value="2">Late</option>' +
-//                '<option value="3">Yes</option>' +
-//                '</select></td>';
+;
 
         html += '<td align="center" class="due_date_review_of_review_allowed_id" width="10%">' +
                 '<select id="due_date_review_of_review_allowed_id" name="due_date[review_of_review_allowed_id]">' +
@@ -173,6 +158,27 @@
                 '<input id="datetimepicker_' + element_id +
                 '" name="due_date[due_at]" style="width: 200px" type="text" value="' +
                 due_at + '">' + '</td>';
+
+
+
+
+
+ //       html += '<td><label for="questionnaire_id">' + AssignmentQuestionnaire.find + ':</label></td>' +
+ //              '<td align="center">' +
+ //               '<select id="questionnaire_id" name="Assignment[questionnaire_id]" style="width:300px">' +
+ //               '<option value="">--None--</option>';
+
+ //       for (i = 0; i < questionnaire_options.length; i++) {
+ //           html += '<option value="' + questionnaire_options[i][1] + '">' + questionnaire_options[i][0] + '</option>'
+ //       }
+
+ //      html += '</select></td>';
+
+
+
+
+
+
 
         previous_element.after(html);
 
