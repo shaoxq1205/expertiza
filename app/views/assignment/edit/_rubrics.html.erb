@@ -12,14 +12,14 @@
 
             html += '<td><label for="questionnaire_id">' + questionnaire.display_type + ':</label></td>' +
                     '<td align="center">';
-                    if(<%=@check %>) {
+                    if(!<%=@check.nil? %>) {
                         if(questionnaire_type=="ReviewQuestionnaire") {
                             html += '<select id="questionnaire_id" name="assignment_questionnaire[questionnaire_id]" style="width:300px" disabled>';
                         }
                         else
                         {html+='<select id="questionnaire_id" name="assignment_questionnaire[questionnaire_id]" style="width:300px">';}
                     }
-                    else if(<%=@check.nil? %>)
+                    else
                     {
                       //  println("aaa");
                         html+='<select id="questionnaire_id" name="assignment_questionnaire[questionnaire_id]" style="width:300px">';
