@@ -19,8 +19,11 @@
                         else
                         {html+='<select id="questionnaire_id" name="assignment_questionnaire[questionnaire_id]" style="width:300px">';}
                     }
-                    else
-                    {html+='<select id="questionnaire_id" name="assignment_questionnaire[questionnaire_id]" style="width:300px">';}
+                    else if(<%=@check.nil? %>)
+                    {
+                      //  println("aaa");
+                        html+='<select id="questionnaire_id" name="assignment_questionnaire[questionnaire_id]" style="width:300px">';
+                    }
 
                     '<option value="">--None--</option>';
 
