@@ -1,10 +1,15 @@
 Expertiza
 =========
 
+OSS Project introductions:
+We are currently using xshao2 branch, after the second round of modification, we will merge into production branch as required.
+
 User:
 Admin: user2
 Teacher: user6
 Student: userxxxx
+
+Password for all: password
 
 
 
