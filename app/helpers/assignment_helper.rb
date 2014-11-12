@@ -22,7 +22,7 @@ module AssignmentHelper
     wiki_type_options
   end
 
-  def questionnaire_options(assignment, type)
+  def questionnaire_options(assignment, type,round = 0)
     questionnaires = Questionnaire.find(:all, :conditions => ['private = 0 or instructor_id = ?', assignment.instructor_id], :order => 'name')
     options = Array.new
     questionnaires.select { |x| x.type == type }.each do |questionnaire|
@@ -77,9 +77,20 @@ module AssignmentHelper
     end
   end
 
+  def questionnaire(assignment, type, round_number)
 
-  def questionnaire(assignment, type)
-    questionnaire = assignment.questionnaires.find_by_type(type)
+    if round_number.nil?
+      questionnaire=assignment.questionnaires.find_by_type(type)
+    else
+      ass_ques=assignment.assignment_questionnaires.find_by_used_in_round(round_number)
+      # make sure the assignment_questionnaire record is not empty
+      if !ass_ques.nil?
+      temp_num=ass_ques.questionnaire_id
+      questionnaire = assignment.questionnaires.find_by_id(temp_num)
+      end
+    end
+
+
     if questionnaire.nil?
       questionnaire = Object.const_get(type).new
       questionnaire
@@ -88,8 +99,9 @@ module AssignmentHelper
     end
   end
 
-  def assignment_questionnaire(assignment, type)
+  def assignment_questionnaire(assignment, type,number)
     questionnaire = assignment.questionnaires.find_by_type(type)
+
 
     if questionnaire.nil?
       default_weight = Hash.new
@@ -111,7 +123,18 @@ module AssignmentHelper
       aq.assignment = @assignment
       aq
     else
+      if number.nil?
       assignment.assignment_questionnaires.find_by_questionnaire_id(questionnaire.id)
+      else
+        assignment_by_usedinround=assignment.assignment_questionnaires.find_by_used_in_round(number)
+        # make sure the assignment found by used in round is not empty
+        if assignment_by_usedinround.nil?
+          assignment.assignment_questionnaires.find_by_questionnaire_id(questionnaire.id)
+        else
+          assignment_by_usedinround
+        end
+
+      end
     end
   end
 
