@@ -93,7 +93,7 @@ class Participant < ActiveRecord::Base
       user = User.find(self.user_id)
       assignment = Assignment.find(self.assignment_id)
 
-      Mailer.deliver_message(
+      Mailer.sync_message(
         {:recipients => user.email,
          :subject => "You have been registered as a participant in Assignment #{assignment.name}",
          :body => {
@@ -104,7 +104,7 @@ class Participant < ActiveRecord::Base
            :partial_name => "register"
          }
       }
-      )
+      ).deliver
     end
 
     #This function updates the topic_id for a participant in assignments where a signup sheet exists
@@ -128,9 +128,6 @@ class Participant < ActiveRecord::Base
         participant.update_attribute(:topic_id, topic_id)
       }
     end
-
-
-
 
     # Return scores that this participant for the given questions
     def get_scores(questions)

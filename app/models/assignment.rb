@@ -38,6 +38,10 @@ class Assignment < ActiveRecord::Base
 
   DEFAULT_MAX_REVIEWERS = 3
 
+  def questionnaires_with_questions
+    questionnaires.includes(:questions).joins(:questions)
+  end
+
   def team_assignment?
     max_team_size > 1
   end
@@ -80,11 +84,13 @@ class Assignment < ActiveRecord::Base
     # Initialize contributor set with all teams participating in this assignment
     contributor_set = Array.new(contributors)
 
+ 
     # Reject contributors that have not selected a topic, or have no submissions
     contributor_set=reject_by_no_topic_selection_or_no_submission(contributor_set)
 
     # Reject contributions of topics whose deadline has passed, or which are not reviewable in the current stage
     contributor_set=reject_by_deadline(contributor_set)
+
 
     # Filter submission by reviewer him/her self
     contributor_set=reject_own_submission(contributor_set, reviewer)
@@ -112,12 +118,12 @@ class Assignment < ActiveRecord::Base
   end
 
   def reject_previously_reviewed_submissions(contributor_set, reviewer)
-    contributor_set.reject! { |contributor| contributor.reviewed_by?(reviewer) }
+    contributor_set = contributor_set.reject { |contributor| contributor.reviewed_by?(reviewer) }
     return contributor_set
   end
 
   def reject_own_submission(contributor_set, reviewer)
-    contributor_set.reject! { |contributor| contributor.teams_users.find_by_user_id(reviewer.id) }
+    contributor_set.reject! { |contributor| contributor.teams_users.find_by_user_id(reviewer.user_id) }
     return contributor_set
   end
 
@@ -336,7 +342,6 @@ class Assignment < ActiveRecord::Base
     self.participants.each do |participant|
       scores[:participants][participant.id.to_s.to_sym] = participant.get_scores(questions)
 
-
       # for all quiz questionnaires (quizzes) taken by the participant
       quiz_responses = Array.new
       quiz_response_mappings = QuizResponseMap.where(reviewer_id: participant.id)
@@ -372,7 +377,7 @@ class Assignment < ActiveRecord::Base
       index = index + 1
     end
     scores
-    end
+  end
 
   def get_contributor(contrib_id)
     AssignmentTeam.find(contrib_id)

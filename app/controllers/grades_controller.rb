@@ -21,12 +21,11 @@ class GradesController < ApplicationController
   #in the scores of all the reviews.
   def view
     @assignment = Assignment.find(params[:id])
-    @questions = Hash.new
-    questionnaires = @assignment.questionnaires
-    questionnaires.each {
-      |questionnaire|
+    @questions = {}
+    questionnaires = @assignment.questionnaires_with_questions
+    questionnaires.each do |questionnaire|
       @questions[questionnaire.symbol] = questionnaire.questions
-    }
+    end
     @scores = @assignment.get_scores(@questions)
     calculate_all_penalties(@assignment.id)
   end
@@ -64,6 +63,7 @@ class GradesController < ApplicationController
       end
     end
 
+    @topic = @participant.topic
     @pscore = @participant.get_scores(@questions)
     @stage = @participant.assignment.get_current_stage(@participant.topic_id)
     calculate_all_penalties(@assignment.id)
@@ -128,7 +128,7 @@ class GradesController < ApplicationController
     body_text["##[recipients_grade]"] = email_form[recipient.fullname+"_grade"]+"%"
     body_text["##[assignment_name]"] = assignment.name
 
-    Mailer.deliver_message(
+    Mailer.sync_message(
       {:recipients => email_form[:recipients],
        :subject => email_form[:subject],
        :from => email_form[:from],
@@ -137,7 +137,7 @@ class GradesController < ApplicationController
          :partial_name => "grading_conflict"
        }
     }
-    )
+    ).deliver
 
     flash[:notice] = "Your email to " + email_form[:recipients] + " has been sent. If you would like to send an email to another student please do so now, otherwise click Back"
     redirect_to :action => 'conflict_email_form',
