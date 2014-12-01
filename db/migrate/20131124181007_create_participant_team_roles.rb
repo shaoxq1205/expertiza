@@ -1,7 +1,10 @@
 class CreateParticipantTeamRoles < ActiveRecord::Migration
   def self.up
     create_table :participant_team_roles do |t|
+<<<<<<< HEAD
       #t.integer :id
+=======
+>>>>>>> E1455/rails4
       t.integer :role_assignment_id
       t.integer :participant_id
       t.timestamps

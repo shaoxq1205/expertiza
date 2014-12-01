@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140808212437) do
+ActiveRecord::Schema.define(version: 20141111010259) do
 
   create_table "assignment_questionnaires", force: true do |t|
     t.integer "assignment_id"
@@ -59,11 +59,14 @@ ActiveRecord::Schema.define(version: 20140808212437) do
     t.boolean  "microtask",                                   default: false
     t.boolean  "availability_flag"
 <<<<<<< HEAD
+<<<<<<< HEAD
     t.boolean  "copy_flag",                         default: false
     t.integer  "rounds_of_reviews",                 default: 1
     t.boolean  "microtask",                         default: false
 =======
 >>>>>>> E1451/rails4
+=======
+>>>>>>> E1455/rails4
     t.boolean  "require_quiz"
     t.integer  "num_quiz_questions",                          default: 0,     null: false
     t.boolean  "is_coding_assignment"
@@ -72,10 +75,14 @@ ActiveRecord::Schema.define(version: 20140808212437) do
     t.integer  "managerreview_questionnaire_id"
     t.integer  "readerreview_questionnaire_id"
 <<<<<<< HEAD
+<<<<<<< HEAD
     t.boolean  "calculate_penalty",                 default: false, null: false
 =======
     t.boolean  "calculate_penalty",                           default: false, null: false
 >>>>>>> E1451/rails4
+=======
+    t.boolean  "calculate_penalty",                           default: false, null: false
+>>>>>>> E1455/rails4
     t.integer  "late_policy_id"
     t.boolean  "is_penalty_calculated",                       default: false, null: false
   end
@@ -172,14 +179,6 @@ ActiveRecord::Schema.define(version: 20140808212437) do
     t.integer "participant_id"
     t.integer "deadline_type_id"
     t.integer "penalty_points"
-  end
-
-  create_table "categories", force: true do |t|
-    t.string  "name"
-    t.integer "parent_id"
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "depth"
   end
 
   create_table "comments", force: true do |t|
@@ -338,8 +337,15 @@ ActiveRecord::Schema.define(version: 20140808212437) do
     t.integer "parent_id"
     t.integer "node_object_id"
     t.string  "type"
+<<<<<<< HEAD
     t.integer "lft"
     t.integer "rgt"
+=======
+    t.string  "name"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "depth"
+>>>>>>> E1455/rails4
   end
 
   create_table "participant_score_views", id: false, force: true do |t|
@@ -372,7 +378,11 @@ ActiveRecord::Schema.define(version: 20140808212437) do
     t.datetime "submitted_at"
     t.boolean  "permission_granted"
     t.integer  "penalty_accumulated",  limit: 8,   default: 0,    null: false
+<<<<<<< HEAD
     t.string   "submitted_hyperlinks", limit: 500
+=======
+    t.string   "submitted_hyperlinks", limit: 100
+>>>>>>> E1455/rails4
     t.float    "grade",                limit: 24
     t.string   "type"
     t.string   "handle"
@@ -449,7 +459,9 @@ ActiveRecord::Schema.define(version: 20140808212437) do
     t.datetime "updated_at"
   end
 
-  add_index "response_maps", ["reviewer_id"], name: "fk_response_map_reviewer", using: :btree
+  add_index "response_maps", ["reviewed_object_id"], name: "index_response_maps_on_reviewed_object_id", using: :btree
+  add_index "response_maps", ["reviewee_id"], name: "index_response_maps_on_reviewee_id", using: :btree
+  add_index "response_maps", ["reviewer_id"], name: "index_response_maps_on_reviewer_id", using: :btree
 
   create_table "responses", force: true do |t|
     t.integer  "map_id",             null: false
@@ -458,7 +470,7 @@ ActiveRecord::Schema.define(version: 20140808212437) do
     t.datetime "updated_at"
   end
 
-  add_index "responses", ["map_id"], name: "fk_response_response_map", using: :btree
+  add_index "responses", ["map_id"], name: "index_responses_on_map_id", using: :btree
 
   create_table "resubmission_times", force: true do |t|
     t.integer  "participant_id"
@@ -513,6 +525,8 @@ ActiveRecord::Schema.define(version: 20140808212437) do
     t.string  "range",                  default: ""
     t.string  "object_type",                          null: false
   end
+
+  add_index "score_caches", ["reviewee_id"], name: "index_score_caches_on_reviewee_id", using: :btree
 
   create_table "score_views", id: false, force: true do |t|
     t.integer  "question_weight"
@@ -624,12 +638,20 @@ ActiveRecord::Schema.define(version: 20140808212437) do
   create_table "survey_responses", force: true do |t|
     t.integer "score",                limit: 8
     t.text    "comments"
+<<<<<<< HEAD
     t.integer "assignment_id",                  default: 0, null: false
+=======
+    t.integer "assignment_id",        limit: 8, default: 0, null: false
+>>>>>>> E1455/rails4
     t.integer "question_id",          limit: 8, default: 0, null: false
     t.integer "survey_id",            limit: 8, default: 0, null: false
     t.string  "email"
     t.integer "survey_deployment_id"
   end
+
+  add_index "survey_responses", ["assignment_id"], name: "fk_survey_assignments", using: :btree
+  add_index "survey_responses", ["question_id"], name: "fk_survey_questions", using: :btree
+  add_index "survey_responses", ["survey_id"], name: "fk_survey_questionnaires", using: :btree
 
   create_table "system_settings", force: true do |t|
     t.string  "site_name",                 default: "", null: false
@@ -717,6 +739,7 @@ ActiveRecord::Schema.define(version: 20140808212437) do
 
   add_index "teams_users", ["team_id"], name: "fk_users_teams", using: :btree
   add_index "teams_users", ["user_id"], name: "fk_teams_users", using: :btree
+  add_index "teams_users", ["user_id"], name: "index_teams_users_on_user_id", using: :btree
 
   create_table "topic_deadlines", force: true do |t|
     t.datetime "due_at"

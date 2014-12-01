@@ -1,7 +1,10 @@
 class CreateTeamRoleQuestionnaire < ActiveRecord::Migration
   def self.up
     create_table "team_role_questionnaire", :force  => true do |t|
+<<<<<<< HEAD
       #t.integer :id
+=======
+>>>>>>> E1455/rails4
       t.integer :team_roles_id
       t.integer :questionnaire_id
       t.timestamps

@@ -1,5 +1,6 @@
 class CreateSurveyResponses < ActiveRecord::Migration
   def self.up
+<<<<<<< HEAD
   create_table "survey_responses", :force => true do |t|
     t.column "score", :integer, :limit => 8
     t.column "comments", :text
@@ -28,6 +29,22 @@ class CreateSurveyResponses < ActiveRecord::Migration
 #             add constraint fk_survey_questionnaires
 #             foreign key (survey_id) references questionnaires(id)" 
   
+=======
+    create_table "survey_responses", :force => true do |t|
+      t.column "score", :integer, limit: 8
+      t.column "comments", :text
+      t.column "assignment_id", :integer, limit: 8, :default => 0, :null => false
+      t.column "question_id", :integer, limit: 8, :default => 0, :null => false
+      t.column "survey_id", :integer, limit: 8, :default => 0, :null => false
+      t.column "email", :string
+    end
+
+    add_index "survey_responses", ["assignment_id"], :name => "fk_survey_assignments"
+
+    add_index "survey_responses", ["question_id"], :name => "fk_survey_questions"
+
+    add_index "survey_responses", ["survey_id"], :name => "fk_survey_questionnaires"
+>>>>>>> E1455/rails4
   end
 
   def self.down

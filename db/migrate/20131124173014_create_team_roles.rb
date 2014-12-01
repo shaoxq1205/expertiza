@@ -1,7 +1,10 @@
 class CreateTeamRoles < ActiveRecord::Migration
   def self.up
     create_table "team_roles", :force => true do |t|
+<<<<<<< HEAD
       #t.integer "id"
+=======
+>>>>>>> E1455/rails4
       t.string "role_names"
       t.integer "questionnaire_id"
     end

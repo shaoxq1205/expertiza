@@ -5,7 +5,11 @@ class CreateAssignments < ActiveRecord::Migration
     t.column "updated_at", :datetime
     t.column "name", :string
     t.column "directory_path", :string
+<<<<<<< HEAD
     t.column "submitter_count", :integer, :limit => 8, :default => 0, :null => false
+=======
+    t.column "submitter_count", :integer, limit: 8, :default => 0, :null => false
+>>>>>>> E1455/rails4
     t.column "course_id", :integer, :default => 0, :null => false
     t.column "instructor_id", :integer, :default => 0, :null => false
     t.column "private", :boolean, :default => false, :null => false
@@ -21,7 +25,11 @@ class CreateAssignments < ActiveRecord::Migration
     t.column "team_assignment", :boolean
     t.column "wiki_type_id", :integer
     t.column "require_signup", :boolean
+<<<<<<< HEAD
     t.column "num_reviewers", :integer, :limit => 8, :default => 0, :null => false
+=======
+    t.column "num_reviewers", :integer, limit: 8, :default => 0, :null => false
+>>>>>>> E1455/rails4
     t.column "spec_location", :text
   end
 

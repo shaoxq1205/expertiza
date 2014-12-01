@@ -1,2 +1,6 @@
 --color
+<<<<<<< HEAD
+=======
+--warnings
+>>>>>>> E1455/rails4
 --require spec_helper

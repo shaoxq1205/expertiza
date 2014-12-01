@@ -4,7 +4,11 @@ class MenuUpdateUsers < ActiveRecord::Migration
     if permission != nil
       site_controller = SiteController.find_by_name('users')
       if site_controller != nil  
+<<<<<<< HEAD
         action = ControllerAction.where(:site_controller_id=>site_controller.id, :name=>'list').first
+=======
+        action = ControllerAction.where(['site_controller_id = ? and name = ?',site_controller.id,'list']).first
+>>>>>>> E1455/rails4
         if action != nil
           action.permission_id = permission.id   
           action.save
@@ -27,7 +31,11 @@ class MenuUpdateUsers < ActiveRecord::Migration
   def self.down
     site_controller = SiteController.find_by_name('users')
     if site_controller != nil
+<<<<<<< HEAD
         action = ControllerAction.where(:site_controller_id=>site_controller.id, :name=>'list').first
+=======
+      action = ControllerAction.where(['site_controller_id = ? and name = ?',site_controller.id,'list']).first
+>>>>>>> E1455/rails4
       if action != nil
         action.permission_id = nil
         action.save

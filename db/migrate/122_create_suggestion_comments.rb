@@ -1,7 +1,10 @@
 class CreateSuggestionComments < ActiveRecord::Migration
   def self.up
     create_table :suggestion_comments do |t|
+<<<<<<< HEAD
        #t.column :id,            :int
+=======
+>>>>>>> E1455/rails4
        t.column :comments,      :text
        t.column :commenter,     :string
        t.column :vote,          :string

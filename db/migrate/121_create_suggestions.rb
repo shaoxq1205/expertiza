@@ -1,7 +1,10 @@
 class CreateSuggestions < ActiveRecord::Migration
   def self.up
     create_table :suggestions do |t|
+<<<<<<< HEAD
      #t.column  :id,                 :int
+=======
+>>>>>>> E1455/rails4
      t.column  :assignment_id,      :int
      t.column  :title,              :string
      t.column  :description,        :string, :limit=>750

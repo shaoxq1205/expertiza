@@ -9,8 +9,13 @@ class CreateParticipants < ActiveRecord::Migration
     t.column "submitted_at", :datetime
     t.column "topic", :string
     t.column "permission_granted", :boolean
+<<<<<<< HEAD
     t.column "penalty_accumulated", :integer, :limit => 8, :default => 0, :null => false
     t.column "submitted_hyperlink", :string, :limit => 500
+=======
+    t.column "penalty_accumulated", :integer, limit: 8, :default => 0, :null => false
+    t.column "submitted_hyperlink", :string, limit: 100
+>>>>>>> E1455/rails4
   end
 
   add_index "participants", ["user_id"], :name => "fk_participant_users"

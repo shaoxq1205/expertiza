@@ -10,7 +10,10 @@ class MenuUpdateLeaderboard < ActiveRecord::Migration
       site_controller = SiteController.create(:name => 'leaderboard', :permission_id => permission1.id, :builtin => 0)
     end
     # is there an index action for leaderboard?
+<<<<<<< HEAD
     #action = ControllerAction.find(:first, :conditions => ['name = "index" and site_controller_id = ?',site_controller.id])
+=======
+>>>>>>> E1455/rails4
     action = ControllerAction.where('name = "index" and site_controller_id = ?',site_controller.id).first
     # if not, create an index action for leaderboard
     if action == nil

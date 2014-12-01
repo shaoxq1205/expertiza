@@ -1,7 +1,10 @@
 class CreateTeamRolesetsMaps < ActiveRecord::Migration
   def self.up
     create_table :team_rolesets_maps   do |t|
+<<<<<<< HEAD
       #t.integer :id
+=======
+>>>>>>> E1455/rails4
       t.integer :team_rolesets_id
       t.integer :team_role_id
       t.timestamps

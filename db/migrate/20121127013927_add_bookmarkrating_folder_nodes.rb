@@ -1,8 +1,12 @@
 class AddBookmarkratingFolderNodes < ActiveRecord::Migration
   def self.up
 
+<<<<<<< HEAD
     #Node.find(:all, :conditions => ['type in ("QuestionnaireTypeNode","QuestionnaireNode")']).each{
     Node.where('type in ("QuestionnaireTypeNode","QuestionnaireNode")').each{
+=======
+    Node.where(['type in ("QuestionnaireTypeNode","QuestionnaireNode")']).find_each{
+>>>>>>> E1455/rails4
         | node |
       node.destroy
     }
@@ -20,7 +24,10 @@ class AddBookmarkratingFolderNodes < ActiveRecord::Migration
 
 
 
+<<<<<<< HEAD
     #folders = TreeFolder.find_all_by_child_type('QuestionnaireNode')
+=======
+>>>>>>> E1455/rails4
     folders = TreeFolder.where(child_type: 'QuestionnaireNode')
     folders.each {
         | folder |
